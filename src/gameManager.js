@@ -12,6 +12,8 @@ class GameManager {
             { imgPath: './assets/spiderman.png', name: 'spiderman'},
             { imgPath: './assets/thor.png', name: 'thor'},
         ]
+        this.iconDefault = "./assets/default.png"
+        this.hiddenHeroes = []
     }
 
     //To use this, we don't need to use static
@@ -35,6 +37,31 @@ class GameManager {
         .sort(() => Math.random() - 0.5)
         
         this.screen.updateImages(copies)
+        // Wait 1 sec to update Screen
+        setTimeout(() => {
+            this.hideHeroes(copies)
+        }, 1000);
+    }
+
+    hideHeroes(heroes) {
+        // Change image of all heroes for default icon
+        // as we did in the constructor, let's extract only what is needed
+
+        // using the syntax ({ key: 1}) we're saying we're going to return
+        // what's inside the relatives
+        // when we don't use : (example of id), JS understands that the name
+        // is the same as the value. E.g. id: id, becomes id.
+
+        const hiddenHeroes = heroes.map(( {name, id} ) => ({
+            id,
+            name,
+            imgPath: this.iconDefault
+        }))
+
+        //update screen with hidden heroes
+        this.screen.updateImages(hiddenHeroes)
+        // save heroes for work with they later
+        this.hiddenHeroes = hiddenHeroes
     }
 
     play() {
