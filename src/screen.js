@@ -1,5 +1,6 @@
 
 const CONTENT_ID = "content"
+const PLAY_BTN_ID = "play"
 
 class Screen {
     static getCardOfImageInHtml(item) {
@@ -24,9 +25,14 @@ class Screen {
         // change from array to String
         return itens.map(Screen.getCardOfImageInHtml).join('')
     }
-s
+
     static updateImages(itens) {
         const htmlCode = Screen.generateHtmlStringFromImage(itens)
         Screen.changeHtmlContent(htmlCode)
+    }
+
+    static configurePlayButton(funcOnClick) {
+        const btnPlay = document.getElementById(PLAY_BTN_ID)
+        btnPlay.onclick = funcOnClick
     }
 }
