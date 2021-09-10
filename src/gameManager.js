@@ -14,6 +14,7 @@ class GameManager {
         ]
         this.iconDefault = "./assets/default.png"
         this.hiddenHeroes = []
+        this.selectedHeroes = []
     }
 
     //To use this, we don't need to use static
@@ -23,6 +24,7 @@ class GameManager {
         this.screen.updateImages(this.earlyHeroes)
         // bind(this) -> force screen to use THIS of the GameManager
         this.screen.configurePlayButton(this.play.bind(this))
+        this.screen.configureVerifySelectionButton(this.verifySelection.bind(this))
     }
 
     shuffle() {
@@ -62,6 +64,35 @@ class GameManager {
         this.screen.updateImages(hiddenHeroes)
         // save heroes for work with they later
         this.hiddenHeroes = hiddenHeroes
+    }
+
+    verifySelection(id, name) {
+        const item = { id, name }
+        // verify quantity of selected heroes and choose if is right or no
+        const selectedHeroes = this.selectedHeroes.length
+        switch (selectedHeroes) {
+            case 0:
+                // add choose to list and wait for next click
+                this.selectedHeroes.push(item)
+                break;
+        
+            case 1:
+                // if quantity choose is 1, user just can choose more one
+                // get first item of list
+                const [ option1 ] = this.selectedHeroes
+                // reset items for no selected more items
+                this.selectedHeroes = []
+                // verify if names and ids is equals
+                // verify if id is different, because, if id is equal, it's the same letter
+                if(option1.name === item.name && option1.id !== item.id) {
+                    alert('Correct Combination!!! ' + item.name)
+                    return // Stop execution
+                }
+                
+                alert('Incorrect Combination!!! ' + item.name)
+                // end case
+                break 
+        }
     }
 
     play() {

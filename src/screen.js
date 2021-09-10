@@ -6,12 +6,16 @@ class Screen {
     static getCardOfImageInHtml(item) {
         return `
         <div class="col-md-3">
-            <div class="card" style="width: 50%;">
+            <div class="card" style="width: 50%;" onclick="window.verifySelection('${item.id}', '${item.name}')">
                 <img src="${item.imgPath}" name="${item.name} class="card-img-top" alt="...">
             </div>
             <br />
         </div>
         `
+    }
+
+    static configureVerifySelectionButton(funcOnClick) {
+        window.verifySelection = funcOnClick
     }
 
     static changeHtmlContent(htmlCode) {
