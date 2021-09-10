@@ -66,6 +66,14 @@ class GameManager {
         this.hiddenHeroes = hiddenHeroes
     }
 
+    showHeroes(heroName) {
+        // find this hero for name in earlyHeroes
+        // get just image of him
+        const { imgPath } = this.earlyHeroes.find(({ name }) => heroName === name)
+        // show just selected hero
+        this.screen.showHeroes(heroName, imgPath)
+    }
+
     verifySelection(id, name) {
         const item = { id, name }
         // verify quantity of selected heroes and choose if is right or no
@@ -85,11 +93,12 @@ class GameManager {
                 // verify if names and ids is equals
                 // verify if id is different, because, if id is equal, it's the same letter
                 if(option1.name === item.name && option1.id !== item.id) {
-                    alert('Correct Combination!!! ' + item.name)
+                    this.showHeroes(item.name)
+                    this.screen.showMessage()
                     return // Stop execution
                 }
-                
-                alert('Incorrect Combination!!! ' + item.name)
+
+                this.screen.showMessage(false)
                 // end case
                 break 
         }
