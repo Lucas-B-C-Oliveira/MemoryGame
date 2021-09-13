@@ -1,6 +1,7 @@
 function onLoad() {
     const dependences = {
-        screen: Screen // the Screen class is global
+        screen: Screen, // the Screen class is global
+        util: Util
     }
 
     //boot up GameManager

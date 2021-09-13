@@ -7,6 +7,7 @@
         <title>MemoryGame</title>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
         <script src="./index.js"></script>
+        <script src="./src/util.js"></script>
         <script src="./src/gameManager.js"></script>
         <script src="./src/screen.js"></script>
     </head>
@@ -16,11 +17,22 @@
             <button type="button" class="btn btn-success" style="width: 10%;" id="play">PLAY</button>
             <button type="button" class="btn btn-danger" style="width: 10%;" id="showAll">SHOW ALL</button>
         </div>
+        
+
+        <div id="loading" class="row container-fluid invisible">
+            <strong id="counter">Start in 1 ...</strong>
+            <div class="spinner-border text-warning" role="status">
+                <span class="visually-hidden">Loading...</span>
+              </div>
+        </div>
+
         <br />
 
         <div id="content" class="row">
 
         </div>
+
+
         <div class="row container-fluid">
             <div id="message" class="alert alert-danger invisible" style="width: 10%;" role="alert">
                 Combination

@@ -1,8 +1,14 @@
 
+// static methods cannot access this
+// so we won't put util in the constructor
+const util = Util
+
 const CONTENT_ID = "content"
 const PLAY_BTN_ID = "play"
 const MESSAGE_ID = "message"
 const CLASS_INVISIBLE = "invisible"
+const LOADING_ID = "loading"
+const COUNTER_ID = "counter"
 const MESSAGE = {
     sucess: {
         text: 'Correct Combination!!!',
@@ -58,7 +64,7 @@ class Screen {
         htmlElements.forEach(item => (item.src = imgPath))
     }
 
-    static showMessage(sucess = true ) {
+    static async showMessage(sucess = true ) {
         const element = document.getElementById(MESSAGE_ID)
         if(sucess) {
             element.classList.remove(MESSAGE.erro.class)
@@ -71,5 +77,20 @@ class Screen {
             element.innerText = MESSAGE.erro.text
         }
         element.classList.remove(CLASS_INVISIBLE)
+        await util.timeout(1000)
+        element.classList.add(CLASS_INVISIBLE)
+    }
+
+    static showLoading(show = true) {
+        const loading = document.getElementById(LOADING_ID)
+
+        if(show){
+            loading.classList.remove(CLASS_INVISIBLE)
+            return
+        }
+        else{
+            loading.classList.add(CLASS_INVISIBLE)
+        }
+
     }
 }

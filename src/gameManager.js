@@ -3,8 +3,9 @@ class GameManager {
     // If you send an Obj = { screen: 1, age: 2, etc: 3}
     // will ignore the rest of the properties and get only the screen property
 
-    constructor({ screen }) {
+    constructor({ screen, util }) {
         this.screen = screen
+        this.util = util
 
         this.earlyHeroes = [
             { imgPath: './assets/batman.png', name: 'batman'},
@@ -27,7 +28,7 @@ class GameManager {
         this.screen.configureVerifySelectionButton(this.verifySelection.bind(this))
     }
 
-    shuffle() {
+    async shuffle() {
         const copies = this.earlyHeroes
         // Duplicate heros
         .concat(this.earlyHeroes)
@@ -39,10 +40,13 @@ class GameManager {
         .sort(() => Math.random() - 0.5)
         
         this.screen.updateImages(copies)
+        this.screen.showLoading()
         // Wait 1 sec to update Screen
-        setTimeout(() => {
-            this.hideHeroes(copies)
-        }, 1000);
+
+        await this.util.timeout(1000)
+        this.hideHeroes(copies)
+        this.screen.showLoading(false)
+ 
     }
 
     hideHeroes(heroes) {
